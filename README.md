@@ -1,8 +1,8 @@
 #  移动端vue组件-级联选择器
 
-[查看GitHub仓库文档详情](https://github.com/Flying-Eagle2/flyingd-cascader.git)
+[查看GitHub仓库最新文档(源码)](https://github.com/flyingdwang/flyingd-cascader)
 
-` https://github.com/Flying-Eagle2/flyingd-cascader.git`
+` https://github.com/flyingdwang/flyingd-cascader.git`
 
 
 
@@ -12,7 +12,7 @@
 
 ### 安装
 
-` cnpm install flyingd-cascader ` 
+` cnpm install flyingd-cascader --save-dev ` 
 
 ### CDN
 

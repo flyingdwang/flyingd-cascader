@@ -1,29 +1,36 @@
-# ## 移动端vue组件-级联选择器
+#  移动端vue组件-级联选择器
 
-[查看GitHub仓库文档详情](https://github.com/Flying-Eagle2/flyingd-cascader.git)
+[查看GitHub仓库最新文档(源码)](https://github.com/flyingdwang/flyingd-cascader)
 
-` https://github.com/Flying-Eagle2/flyingd-cascader.git`
+` https://github.com/flyingdwang/flyingd-cascader.git`
+
+[查看在线演示](http://mini.gzfsnet.com/flyingd-cascader/index.html)
 
 ### 安装
 
-` cnpm install flyingd-cascader ` 
+` cnpm install flyingd-cascader --save-dev ` 
 
 ### CDN
 
 **在页面上引入 js 和 css 文件即可开始使用 **
 
-` 等我....上代码`
+```  
+<!-- 引入css -->
+<link rel="stylesheet" type="text/css" href="http://mini.gzfsnet.com/flyingd-cascader/flyingd-cascader.css"/>
+
+<!-- 引入js -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="http://mini.gzfsnet.com/flyingd-cascader/flyingd-cascader.js"></script>
+```
+
+
 
 ### 演示代码
-
-### html
 
 ``` html
 <flyingd-cascader  v-model="cascaderOption"  :visible.sync="cascaderVisible"  :options="options"  :cascadervalue="cascadervalue"  :cascaderlabel="cascaderlabel"  :placeholder="cascaderPlaceholder"
 :cascaderchildren="cascaderchildren"  popper-class='flyingdwang-cascader'   @change="cascaderFun"  ></flyingd-cascader>
 ```
-
-### js
 
 <script>
 import flyingdCascader from 'flyingd-cascader';

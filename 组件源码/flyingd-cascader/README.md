@@ -1,264 +1,111 @@
-# ## 移动端vue组件-级联选择器
+#  移动端vue组件-级联选择器
 
-[查看GitHub仓库文档详情](https://github.com/Flying-Eagle2/flyingd-cascader.git)
+[查看GitHub仓库最新文档(源码)](https://github.com/flyingdwang/flyingd-cascader)
 
-` https://github.com/Flying-Eagle2/flyingd-cascader.git`
+` https://github.com/flyingdwang/flyingd-cascader.git`
+
+
+
+[查看在线演示](http://mini.gzfsnet.com/flyingd-cascader/index.html)
+
+
 
 ### 安装
 
-` cnpm install flyingd-cascader ` 
+` cnpm install flyingd-cascader --save-dev ` 
 
 ### CDN
 
 **在页面上引入 js 和 css 文件即可开始使用 **
 
-` 等我....上代码`
+```  
+<!-- 引入css -->
+<link rel="stylesheet" type="text/css" href="http://mini.gzfsnet.com/flyingd-cascader/flyingd-cascader.css"/>
+
+<!-- 引入js -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="http://mini.gzfsnet.com/flyingd-cascader/flyingd-cascader.js"></script>
+```
+
+
 
 ### 演示代码
 
-<template>
+``` html
+<flyingd-cascader v-model="cascaderOption" :visible.sync="cascaderVisible" :options="options"  :cascadervalue="cascadervalue" :cascaderlabel="cascaderlabel" :placeholder="cascaderPlaceholder"
+           :cascaderchildren="cascaderchildren"  popper-class='flyingdwang-cascader'   @change="cascaderFun" 
+        ></flyingd-cascader>
+```
 
-​	<flyingd-cascader  v-model="cascaderOption"  :visible.sync="cascaderVisible"  :options="options"  :cascadervalue="cascadervalue"  :cascaderlabel="cascaderlabel"  :placeholder="cascaderPlaceholder"
-
-​           :cascaderchildren="cascaderchildren"  popper-class='flyingdwang-cascader'   @change="cascaderFun" 
-
-​        \></flyingd-cascader>
-
-</template>
-
+```  js
 <script>
-import flyingdCascader from 'flyingd-cascader';
-export default {
-  name: 'demo',
-  components:{
-    flyingdCascader
-  },
-  data () {
-    return {
-      options: [
-          {
-          value: 'zhinan',
-          label: '指南',
-          children: [{
-            value: 'shejiyuanze',
-            label: '设计原则',
-            children: [{
-              value: 'yizhi',
-              label: '一致',
-              disabled:true,
-              }, {
-              value: 'fankui',
-              label: '反馈'
-              }, {
-              value: 'xiaolv',
-              label: '效率'
-              }, {
-              value: 'kekong',
-              label: '可控'
-              }]
-          }, {
-              value: 'daohang',
-              label: '导航',
-              disabled:true,
-              children: [{
-              value: 'cexiangdaohang',
-              label: '侧向导航'
-              }, {
-              value: 'dingbudaohang',
-              label: '顶部导航'
-              }]
-          }]
-          }, {
-          value: 'zujian',
-          label: '组件',
-          children: [{
-              value: 'basic',
-              label: 'Basic',
-              children: [{
-              value: 'layout',
-              label: 'Layout 布局'
-              }, {
-              value: 'color',
-              label: 'Color 色彩'
-              }, {
-              value: 'typography',
-              label: 'Typography 字体'
-              }, {
-              value: 'icon',
-              label: 'Icon 图标'
-              }, {
-              value: 'button',
-              label: 'Button 按钮'
-              }]
-          }, {
-              value: 'form',
-              label: 'Form',
-              children: [{
-              value: 'radio',
-              label: 'Radio 单选框'
-              }, {
-              value: 'checkbox',
-              label: 'Checkbox 多选框'
-              }, {
-              value: 'input',
-              label: 'Input 输入框'
-              }, {
-              value: 'input-number',
-              label: 'InputNumber 计数器'
-              }, {
-              value: 'select',
-              label: 'Select 选择器'
-              }, {
-                  value: 'cascader',
-                  label: 'Cascader 级联选择器'
-              }, {
-              value: 'switch',
-              label: 'Switch 开关'
-              }, {
-              value: 'slider',
-              label: 'Slider 滑块'
-              }, {
-              value: 'time-picker',
-              label: 'TimePicker 时间选择器'
-              }, {
-                  value: 'date-picker',
-                  label: 'DatePicker 日期选择器',
-                  children: [{
-                      value: 'axure',
-                      label: 'Axure Components'
-                  }, {
-                      value: 'sketch',
-                      label: 'Sketch Templates'
-                  }, {
-                      value: 'jiaohu',
-                      label: '组件交互文档'
-                  }]
-              }, {
-              value: 'datetime-picker',
-              label: 'DateTimePicker 日期时间选择器'
-              }, {
-              value: 'upload',
-              label: 'Upload 上传'
-              }, {
-              value: 'rate',
-              label: 'Rate 评分'
-              }, {
-              value: 'form',
-              label: 'Form 表单'
-              }]
-          }, {
-              value: 'data',
-              label: 'Data',
-              children: [{
-              value: 'table',
-              label: 'Table 表格'
-              }, {
-              value: 'tag',
-              label: 'Tag 标签'
-              }, {
-              value: 'progress',
-              label: 'Progress 进度条'
-              }, {
-              value: 'tree',
-              label: 'Tree 树形控件'
-              }, {
-              value: 'pagination',
-              label: 'Pagination 分页'
-              }, {
-              value: 'badge',
-              label: 'Badge 标记'
-              }]
-          }, {
-              value: 'notice',
-              label: 'Notice',
-              children: [{
-              value: 'alert',
-              label: 'Alert 警告'
-              }, {
-              value: 'loading',
-              label: 'Loading 加载'
-              }, {
-              value: 'message',
-              label: 'Message 消息提示'
-              }, {
-              value: 'message-box',
-              label: 'MessageBox 弹框'
-              }, {
-              value: 'notification',
-              label: 'Notification 通知'
-              }]
-          }, {
-              value: 'navigation',
-              label: 'Navigation',
-              children: [{
-              value: 'menu',
-              label: 'NavMenu 导航菜单'
-              }, {
-              value: 'tabs',
-              label: 'Tabs 标签页'
-              }, {
-              value: 'breadcrumb',
-              label: 'Breadcrumb 面包屑'
-              }, {
-              value: 'dropdown',
-              label: 'Dropdown 下拉菜单'
-              }, {
-              value: 'steps',
-              label: 'Steps 步骤条'
-              }]
-          }, {
-              value: 'others',
-              label: 'Others',
-              children: [{
-              value: 'dialog',
-              label: 'Dialog 对话框'
-              }, {
-              value: 'tooltip',
-              label: 'Tooltip 文字提示'
-              }, {
-              value: 'popover',
-              label: 'Popover 弹出框'
-              }, {
-              value: 'card',
-              label: 'Card 卡片'
-              }, {
-              value: 'carousel',
-              label: 'Carousel 走马灯'
-              }, {
-              value: 'collapse',
-              label: 'Collapse 折叠面板'
-              }]
-          }]
-          }, {
-          value: 'ziyuan',
-          label: '资源',
-          children: [{
-              value: 'axure',
-              label: 'Axure Components'
-          }, {
-              value: 'sketch',
-              label: 'Sketch Templates'
-          }, {
-              value: 'jiaohu',
-              label: '组件交互文档'
-          }]
-          }
-      ],
-      cascadervalue:'value',
-      cascaderlabel:'label',
-      cascaderchildren:'children',
-      cascaderOption:["zujian","data"],
-      cascaderPlaceholder:['选择省份','选择城市','请选择参数'],
-      cascaderVisible:false,
-    }
-  },
-  methods: {
-    cascaderFun:function (option){
-        console.log(option,this.cascaderOption);
-    },
-  },
+import flyingdCascader from 'flyingd-cascader';
+export default {
+  name: 'demo',
+  components:{
+    flyingdCascader
+  },
+  data () {
+    return {
+      options: [
+          {
+          value: 'ziyuan',
+          label: '资源',
+          children: [{
+              value: 'axure',
+              label: 'Axure Components'
+          }, {
+              value: 'sketch',
+              label: 'Sketch Templates',
+              disabled:true,
+	
+          }, {
+              value: 'jiaohu',
+              label: '组件交互文档',
+               children: [{
+                  value: 'table',
+                  label: 'Table 表格'
+                  }, {
+                  value: 'tag',
+                  label: 'Tag 标签'
+                  }, {
+                  value: 'progress',
+                  label: 'Progress 进度条'
+                  }, {
+                  value: 'tree',
+                  label: 'Tree 树形控件'
+                  }, {
+                  value: 'pagination',
+                  label: 'Pagination 分页'
+                  }, {
+                  value: 'badge',
+                  label: 'Badge 标记'
+               }]
+          	}]
+          }
+      ],
+      cascadervalue:'value',
+      cascaderlabel:'label',
+      cascaderchildren:'children',
+      cascaderOption:["ziyuan"],
+      cascaderPlaceholder:['请选择资源','请选择组件','请选择参数'],
+      cascaderVisible:false,
+    }
+  },
+  methods: {
+    cascaderFun:function (option){
+        console.log(option,this.cascaderOption);
+    },
+      
+  },
 }
 </script>
+```
+
+
+
+
+
 
 
 
@@ -269,14 +116,14 @@ export default {
 | 参数                | 说明                                    | 类型    | 默认值   |
 | ------------------- | --------------------------------------- | ------- | -------- |
 | visible             | 是否显示 cascader                       | boolean | false    |
-| options             | 可选项数据源，键名可通过 props 属性配置 | array   | -        |
-| value               | 选中项绑定值                            | array   | -        |
+| options             | 可选项数据源，键名可通过 props 属性配置 | Array   | -        |
+| value               | 选中项绑定值                            | Array   | -        |
 | cascadervalue       | 指定选项的值为选项对象的某个属性值      | string  | value    |
 | cascaderlabel       | 指定选项标签为选项对象的某个属性值      | string  | label    |
 | cascaderchildren    | 指定选项的子选项为选项对象的某个属性值  | string  | children |
 | disabled            | 指定选项的禁用为选项对象的某个属性值    | Boolean | false    |
 | popper-class        | 自定义浮层类名                          | string  | -        |
-| cascaderPlaceholder | 占位文本                                | array   | -        |
+| cascaderPlaceholder | 占位文本                                | Array   | -        |
 
 ### props
 
@@ -284,7 +131,7 @@ export default {
 | -------- | ---------- | ------- | ------ |
 | value    | 对象属性值 | string  | -      |
 | label    | 对象属性值 | string  | -      |
-| children | 子选项     | Object  | -      |
+| children | 子选项     | Array   | -      |
 | disabled | 是否禁用   | Boolean | -      |
 
 ### Events
