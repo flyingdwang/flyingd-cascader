@@ -10,8 +10,8 @@
         <div class="flyingd-cascader flex-column" @click="prevent"  id="flyingd-cascader" :class="$attrs['popper-class']">
             <div class="cascader-nav">
                 <template v-for="(item, index) in (selectedLabel.length>placeholder.length?selectedLabel:placeholder.length?placeholder:1)">
-                    <span @click="((!tableTagParent&&!index)||(tableTagParent&&tableTagParent.split('-').length >= index)? sideActiveChange(index) : null)"  :key="index" class="text1" 
-                        :class="(sideActive==index?'active ': ' ')+((!tableTagParent&&!index)||(tableTagParent&&tableTagParent.split('-').length >= index)? '' : 'is-disabled')" >
+                    <span @click=" itemStatus(index) ? sideActiveChange(index) : null"  :key="index" class="text1" 
+                        :class="(sideActive==index?'active ': ' ')+( itemStatus(index) ? '' : 'is-disabled')" >
                         {{selectedLabel[index]||placeholder[index]||'请选择'}}
                     </span>
                 </template>
@@ -78,6 +78,14 @@ export default {
             if(!this.tableTagParent) return;
             // console.log(this.tableTagParent,index);
             this.tableTag = this.tableTagParent.split('-').slice(0,index);
+        },
+        /** 内容是否可选状态 */
+        itemStatus(index){
+            if((!this.tableTagParent&&!index)||(this.tableTagParent&&this.tableTagParent.split('-').length >= index)){
+                return true;
+            }else {
+                return false;
+            }
         },
         cascaderChange(item,index){
             this.cascaderSelectChange((JSON.parse(JSON.stringify(this.tableTag))).concat(index),item);
