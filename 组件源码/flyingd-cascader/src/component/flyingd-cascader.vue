@@ -6,7 +6,7 @@
  *  author : flyingd
  */ 
 <template>
-     <div class="dialog" v-show="visible" @click="handleClose">
+     <div class="flyingd-dialog" v-show="visible" @click="handleClose">
         <div class="flyingd-cascader flex-column" @click="prevent"  id="flyingd-cascader" :class="$attrs['popper-class']">
             <div class="cascader-nav">
                 <template v-for="(item, index) in (selectedLabel.length>placeholder.length?selectedLabel:placeholder.length?placeholder:1)">
@@ -33,7 +33,7 @@ export default {
      data(){
         return {
             selectedLabel:[],
-            tableTagParent:'',
+            tableTagParent:[],
             tableTag:[],
             sideActive:0,
             preserve:[],
@@ -77,11 +77,12 @@ export default {
             this.sideActive = index;
             if(!this.tableTagParent) return;
             // console.log(this.tableTagParent,index);
-            this.tableTag = this.tableTagParent.split('-').slice(0,index);
+            this.tableTag = this.tableTagParent.slice(0,index);
         },
         /** 内容是否可选状态 */
         itemStatus(index){
-            if((!this.tableTagParent&&!index)||(this.tableTagParent&&this.tableTagParent.split('-').length >= index)){
+            let { tableTagParent } = this;
+            if((!tableTagParent&&!index)||(tableTagParent&&tableTagParent.length >= index)){
                 return true;
             }else {
                 return false;
@@ -93,46 +94,45 @@ export default {
             if(!item[this.cascaderchildren]) return (setTimeout(()=>{ this.handleClose() },200));
             setTimeout(()=>{ 
                 this.tableTag.push(index);
-                this.tableTagParent = this.tableTag.join('-');
+                this.tableTagParent = this.tableTag;
                 this.sideActive++;
             },200)
         },
         /** 处理选中的值 */
         cascaderSelectChange(tableTag,item){
             /** 选中的值value值 */
-            var selectValue = [];
+            let selectValue = [];
             /** 选中的值label值 */
-            var selectedLabel = [];
-            var { length }  = tableTag;
+            let selectedLabel = [];
+            const { length }  = tableTag;
             if(length){
-                var selectItem = null
+                let selectItem = null,
+                    children = null,
+                    value = null,
+                    label = null;
+                
                 for(var i=0;i<length;i++){
                     if(i==0&&!selectItem){
-                        var  children  = this.options[tableTag[i]][this.cascaderchildren] ;
-                        var  value = this.options[tableTag[i]][this.cascadervalue] ;
-                        var  label = this.options[tableTag[i]][this.cascaderlabel] ;
-                        selectValue.push(value);
-                        selectedLabel.push(label);
-                        if(children){
-                            selectItem = children ;
-                        }
+                        children  = this.options[tableTag[i]][this.cascaderchildren] ;
+                        value = this.options[tableTag[i]][this.cascadervalue] ;
+                        label = this.options[tableTag[i]][this.cascaderlabel] ;
                     }else {
-                        var children = selectItem[tableTag[i]][this.cascaderchildren] ;
-                        var  value = selectItem[tableTag[i]][this.cascadervalue] ;
-                        var  label = selectItem[tableTag[i]][this.cascaderlabel] ;
-                        selectValue.push(value);
-                        selectedLabel.push(label);
-                        if(children){
-                            selectItem = children ;
-                        }
+                        children = selectItem[tableTag[i]][this.cascaderchildren] ;
+                        value = selectItem[tableTag[i]][this.cascadervalue] ;
+                        label = selectItem[tableTag[i]][this.cascaderlabel] ;
+                    }
+                    selectValue.push(value);
+                    selectedLabel.push(label);
+                    if(children){
+                        selectItem = children ;
                     }
                 }
             }
             item[this.cascaderchildren]&&selectedLabel.push('');
             this.selectedLabel = selectedLabel;
             /** 传值给父组件v-model绑定的字段 */
-            let { expression } = this.$vnode.data.model
-            this.$parent._data[expression] = selectValue;
+            let { expression } = this.$vnode.data.model&&this.$vnode.data.model||{}
+            expression&&(this.$parent._data[expression] = selectValue);
             /** 保存选中值用于判断 */
             this.preserve = selectValue;
             /** 判断是否接收修改参数 */
@@ -144,23 +144,27 @@ export default {
         initSelected(){
             /** 清空之前选中的值 */
             this.tableTag = [];
-            var { length } = this.value;
+            let { length } = this.value;
             /** 选中的值label值 */
-            var selectedLabel = [];
+            let selectedLabel = [];
             if(length){
-                var item = null;
+                let item = null,children = null,value = null,label = null;
                 for(var i=0;i<length;i++){
                     for (let index = 0; index < (item&&item.length||this.options.length); index++) {
                         /** 取其中对应的参数 */
-                        const value = item ? item[index][this.cascadervalue] : this.options[index][this.cascadervalue];
+                        value = item ? item[index][this.cascadervalue] : this.options[index][this.cascadervalue];
                         if(value==this.value[i]){
-                            const label = item ? item[index][this.cascaderlabel] : this.options[index][this.cascaderlabel];
+                            label = item ? item[index][this.cascaderlabel] : this.options[index][this.cascaderlabel];
                             selectedLabel.push(label)
-                            var  children  = item ? item[index][this.cascaderchildren] : this.options[index][this.cascaderchildren] ;
+                            children  = item ? item[index][this.cascaderchildren] : this.options[index][this.cascaderchildren] ;
                             if(children){
                                 item = children ;
                                 /** 添加索引 */
                                 this.tableTag.push(index);
+                            }
+                            /** 判断是否有子级 */
+                            if(i+1==length){
+                                children&&selectedLabel.push('')
                             }
                             break;
                         }
@@ -170,27 +174,24 @@ export default {
                 /** 更改对应的label值 */
                 this.selectedLabel = selectedLabel;
                 /** 保存索引值 */
-                this.tableTagParent = this.tableTag.join('-');
-                /** 改变初始选择值 */
-                this.sideActive = length;
+                this.tableTagParent = this.tableTag;
+                /** 改变初始选中值 */
+                this.sideActive = selectedLabel.length-1;
             }
         },
         /** 数据处理 */
         processingData(){
-            var { length }  = this.tableTag;
+            let { length }  = this.tableTag;
             if(length){
-                var item = null;
+                let item = null ,children = null;
                 for(var i=0;i<length;i++){
                     if(i==0&&!item){
-                        var  children  = this.options[this.tableTag[i]][this.cascaderchildren] ;
-                        if(children){
-                            item = children ;
-                        }
+                        children  = this.options[this.tableTag[i]][this.cascaderchildren] ;
                     }else {
-                        var children = item[this.tableTag[i]][this.cascaderchildren] ;
-                        if(children){
-                            item = children ;
-                        }
+                        children = item[this.tableTag[i]][this.cascaderchildren] ;
+                    }
+                    if(children){
+                        item = children ;
                     }
                 }
                 return item;
@@ -252,7 +253,7 @@ export default {
     text-overflow: ellipsis;
 }
 /** 对话框 */
-.dialog {
+.flyingd-dialog {
   position: fixed;
   left: 50%;
   top: 50%;

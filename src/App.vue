@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-       <flyingd-cascader v-model="cascaderOption" :visible.sync="cascaderVisible" :options="options" @close="close()" :cascadervalue="cascadervalue" :cascaderlabel="cascaderlabel" :placeholder="cascaderPlaceholder"
-           :cascaderchildren="cascaderchildren"  popper-class='flyingdwang-cascader'   @change="cascaderFun" 
+       <flyingd-cascader v-model="cascaderOption" :visible.sync="cascaderVisible" :options="options" @close="close()" 
+            popper-class='flyingdwang-cascader'   @change="cascaderFun" 
         ></flyingd-cascader>
         <div class="cascader-btn" @click="cascaderVisible=true" >
             移动端vue组件-级联选择器
@@ -228,11 +228,8 @@ export default {
           }]
           }
       ],
-      cascadervalue:'value',
-      cascaderlabel:'label',
-      cascaderchildren:'children',
-      cascaderOption:[],
-      cascaderPlaceholder:['选择功能','选择组件','请选择参数'],
+      cascaderOption:["zujian",],
+      // cascaderPlaceholder:['选择功能','选择组件','请选择参数'],
       cascaderVisible:false,
     }
   },

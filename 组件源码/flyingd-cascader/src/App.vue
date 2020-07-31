@@ -232,7 +232,7 @@ export default {
       cascaderlabel:'label',
       cascaderchildren:'children',
       cascaderOption:[],
-      cascaderPlaceholder:['选择省份','选择城市','请选择参数'],
+      cascaderPlaceholder:['选择功能','选择组件','请选择参数'],
       cascaderVisible:false,
     }
   },
