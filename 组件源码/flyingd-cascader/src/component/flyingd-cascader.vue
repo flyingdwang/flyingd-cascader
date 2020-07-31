@@ -4,7 +4,7 @@
  * version 1.0.0
  * dete 2020-07-26
  *  author : flyingd
- */
+ */ 
 <template>
      <div class="dialog" v-show="visible" @click="handleClose">
         <div class="flyingd-cascader flex-column" @click="prevent"  id="flyingd-cascader" :class="$attrs['popper-class']">

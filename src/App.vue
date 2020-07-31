@@ -4,7 +4,7 @@
            :cascaderchildren="cascaderchildren"  popper-class='flyingdwang-cascader'   @change="cascaderFun" 
         ></flyingd-cascader>
         <div class="cascader-btn" @click="cascaderVisible=true" >
-            级联选择器
+            移动端vue组件-级联选择器
         </div>
   </div>
 </template>
