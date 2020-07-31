@@ -66,8 +66,8 @@ export default {
         },
         /** v-model */
         value: {
-            // type: Boolean,
-            // default: false
+            type:Array,
+            default:Array,
         },
     },
     created(){
