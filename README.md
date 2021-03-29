@@ -5,7 +5,7 @@
 ` https://github.com/flyingdwang/flyingd-cascader.git`
 
 
- 
+
 [查看在线演示](http://mini.gzfsnet.com/flyingd-cascader/index.html)
 
 
@@ -13,21 +13,6 @@
 ### 安装
 
 ` cnpm install flyingd-cascader --save-dev ` 
-
-### CDN
-
-**在页面上引入 js 和 css 文件即可开始使用 **
-
-```  
-<!-- 引入css -->
-<link rel="stylesheet" type="text/css" href="http://mini.gzfsnet.com/flyingd-cascader/flyingd-cascader.css"/>
-
-<!-- 引入js -->
-<script src="https://unpkg.com/vue/dist/vue.js"></script>
-<script src="http://mini.gzfsnet.com/flyingd-cascader/flyingd-cascader.js"></script>
-```
-
-
 
 ### 演示代码
 

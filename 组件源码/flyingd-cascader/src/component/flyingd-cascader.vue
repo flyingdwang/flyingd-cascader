@@ -136,9 +136,10 @@ export default {
             /** 保存选中值用于判断 */
             this.preserve = selectValue;
             /** 判断是否接收修改参数 */
-            if(!this.$listeners.change) return;
-            let name = this.$listeners.change.fns.name.split(' ')[1];
-            this.$parent[name]&&this.$parent[name]({selectValue,selectedLabel});
+            this.$emit('change',{selectValue,selectedLabel});
+            // if(!this.$listeners.change) return;
+            // let name = this.$listeners.change.fns.name.split(' ')[1];
+            // this.$parent[name]&&this.$parent[name]({selectValue,selectedLabel});
         },
         /** 初始化默认选中值 */
         initSelected(){
@@ -230,19 +231,19 @@ export default {
 <style scoped>
 @import '../assets/iconfont/iconfont.css' ;
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
-::-webkit-scrollbar {
+.cascader-body-box::-webkit-scrollbar {
   width: 0.12rem;
   height: 0.12rem;
   background-color: #F5F5F5;
 }
 /*定义滚动条轨道 内阴影+圆角*/
-::-webkit-scrollbar-track {
+.cascader-body-box::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   background-color: #F5F5F5;
 }
 /*定义滑块 内阴影+圆角*/
-::-webkit-scrollbar-thumb {
+.cascader-body-box::-webkit-scrollbar-thumb {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #555;
