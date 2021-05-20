@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-       <flyingd-cascader v-model="cascaderOption" :visible.sync="cascaderVisible" :options="options"  :cascadervalue="cascadervalue" :cascaderlabel="cascaderlabel" :placeholder="cascaderPlaceholder"
-           :cascaderchildren="cascaderchildren"  popper-class='flyingdwang-cascader'   @change="cascaderFun" 
+       <flyingd-cascader v-model="cascaderOption" :visible.sync="cascaderVisible" :options="options"    popper-class='flyingdwang-cascader'   @change="cascaderFun" 
         ></flyingd-cascader>
         <div class="cascader-btn" @click="cascaderVisible=true" >
             移动端vue组件-级联选择器
@@ -231,16 +230,22 @@ export default {
       cascadervalue:'value',
       cascaderlabel:'label',
       cascaderchildren:'children',
-      cascaderOption:[],
+      cascaderOption:['zujian'],
       cascaderPlaceholder:['选择功能','选择组件','请选择参数'],
       cascaderVisible:false,
     }
   },
+  created(){
+    // setTimeout(()=>{
+    //   this.cascaderOption = ['zujian','form'];
+    // },1000)
+  },
   methods: {
+    /** 公用文件 */
+    // ...commonMain,
     cascaderFun:function (option){
-        console.log(option,this.cascaderOption);
+      console.log(option,this.cascaderOption);
     },
-      
   },
 }
 </script>
@@ -267,14 +272,14 @@ body * {
   background-color: #409eff;
   border-color: #409eff;
   line-height: 1;
-  white-space: nowrap;
   cursor: pointer;
   border: 1px solid #dcdfe6;
-  -webkit-appearance: none;
   text-align: center;
   box-sizing: border-box;
-  outline: none;
   margin: .2rem auto ;
+  -webkit-appearance: none;
+  white-space: nowrap;
+  outline: none;
   transition: .1s;
   font-weight: 500;
   padding: 0.24rem .4rem;

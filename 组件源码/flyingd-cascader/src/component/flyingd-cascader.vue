@@ -131,15 +131,11 @@ export default {
             item[this.cascaderchildren]&&selectedLabel.push('');
             this.selectedLabel = selectedLabel;
             /** 传值给父组件v-model绑定的字段 */
-            let { expression } = this.$vnode.data.model&&this.$vnode.data.model||{}
-            expression&&(this.$parent._data[expression] = selectValue);
+            this.$emit('input',selectValue);
             /** 保存选中值用于判断 */
             this.preserve = selectValue;
             /** 判断是否接收修改参数 */
             this.$emit('change',{selectValue,selectedLabel});
-            // if(!this.$listeners.change) return;
-            // let name = this.$listeners.change.fns.name.split(' ')[1];
-            // this.$parent[name]&&this.$parent[name]({selectValue,selectedLabel});
         },
         /** 初始化默认选中值 */
         initSelected(){
